@@ -71,4 +71,4 @@ This laboratory puts into practice several fundamental concepts of network admin
 ## 🚀 Documentation and Deployment
 The entire process of building this laboratory is detailed in a step-by-step operational manual (initial configuration, command-line interfaces, WebGUI security rules, Nginx installation).
 
-👉 **[Consult the full Deployment Guide (Tutorial)](DEPLOYMENT_GUIDE_en.md)**
+👉 **[Consult the full Deployment Guide (Tutorial)](GUIDE_DEPLOIEMENT_en.md)**

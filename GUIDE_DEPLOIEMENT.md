@@ -474,8 +474,7 @@ Une fois Debian redémarré, tu te retrouves face à un écran noir avec une inv
 
 3. Mets à jour la liste des paquets et installe le serveur Web Nginx :
    ```bash
-   apt update
-apt install nginx -y
+   apt install nginx -y
 
 4. Remplace la page d'accueil par défaut de Nginx par une page personnalisée propre à notre lab :
    ```bash

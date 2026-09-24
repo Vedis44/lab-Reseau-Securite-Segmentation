@@ -1,3 +1,5 @@
+[ 🇫🇷 Français ] | [ 🇬🇧 English ](README_en.md)
+
 # 🛡️ Infrastructure Réseau, Sécurité et Segmentation
 
 <br>
@@ -69,4 +71,4 @@ Ce laboratoire met en pratique plusieurs concepts fondamentaux de l'administrati
 ## 🚀 Documentation et Déploiement
 L'intégralité du processus de construction de ce laboratoire est détaillée dans un manuel opérationnel pas-à-pas (configuration initiale, interfaces en ligne de commande, règles de sécurité WebGUI, installation Nginx).
 
-👉 **[Consulter le Guide de Déploiement complet (Tutoriel)](GUIDE_DEPLOIEMENT.md)**
+👉 **[Consulter le Guide de Déploiement complet (Tutoriel)](GUIDE_DEPLOIEMENT_fr.md)**

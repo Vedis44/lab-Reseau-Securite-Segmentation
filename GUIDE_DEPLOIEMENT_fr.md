@@ -50,7 +50,7 @@ flowchart TD
 | Rôle VM | Système | vCPU | RAM | Disque | Interfaces | Réseaux Virtuels | Adresses IP |
 | :--- | :--- | :---: | :---: | :---: | :--- | :--- | :--- |
 | **Pare-feu** | OPNsense | 1 | 1-2 Go | 20 Go | WAN (em0), LAN (em1), DMZ (em2) | **VMnet8** (NAT), **VMnet10** (Host-only), **VMnet20** (Host-only) | DHCP, `192.168.10.1/24`, `192.168.20.1/24` |
-| **Serveur Web** | Debian 12 | 1 | 1-2 Go | 25 Go | eth0 | **VMnet20** (DMZ) | `192.168.20.10/24` (Statique) |
+| **Serveur Web** | Debian 13 | 1 | 1-2 Go | 25 Go | eth0 | **VMnet20** (DMZ) | `192.168.20.10/24` (Statique) |
 | **Client** | Windows 10 | 4 | 4-6 Go | 40 Go | Ethernet0 | **VMnet10** (LAN) | DHCP OPNsense (`192.168.10.x`) |
 
 <br>
@@ -74,7 +74,7 @@ La toute première étape consiste à préparer le "câblage" virtuel dans VMwar
 
 Paramétrage des trois machines selon le tableau de dimensionnement défini dans l'architecture.
 - **Pare-feu OPNsense :** 1 vCPU, 2 Go RAM, 20 Go Disque. Ajout strict des 3 cartes réseau dans le bon ordre pour simplifier la configuration : WAN (VMnet8) en premier, LAN (VMnet10) en deuxième, DMZ (VMnet20) en troisième.
-- **Serveur Web (Debian 12) :** 1 vCPU, 2 Go RAM, 25 Go Disque. Ajout d'une seule carte réseau assignée à la DMZ (VMnet20).
+- **Serveur Web (Debian 13) :** 1 vCPU, 2 Go RAM, 25 Go Disque. Ajout d'une seule carte réseau assignée à la DMZ (VMnet20).
 - **Client (Windows 10) :** 4 vCPU, 6 Go RAM, 40 Go Disque. Ajout d'une seule carte réseau assignée au LAN (VMnet10).
 
 <br>
@@ -101,7 +101,7 @@ Mise en place du poste utilisateur dans le réseau interne, qui servira aussi de
 ## 🌐 Phase 5 : Déploiement du Serveur Web (Debian 12)
 
 Mise en place du serveur dans la zone isolée.
-- Installation de Debian 12 (sans interface graphique pour des raisons de performances).
+- Installation de Debian 13 (sans interface graphique pour des raisons de performances).
 - Configuration réseau en IP statique (`192.168.20.10`, passerelle `192.168.20.1`, DNS).
 - Installation du service Web (Nginx ou Apache) et création d'une page d'accueil HTML personnalisée de test.
 
@@ -416,7 +416,7 @@ Un assistant de premier démarrage (*Wizard*) se lance automatiquement lors de l
 > * **Symptôme :** OPNsense perd l'accès à Internet, les mises à jour échouent et la passerelle NAT (`192.168.38.2`) ne répond plus aux pings (`Host is down`).
 > * **Résolution :** Sur la machine hôte Windows, ouvrir la fenêtre Exécuter (**Windows + R**), saisir `services.msc` et redémarrer les services **VMware NAT Service** et **VMware DHCP Service**. La connectivité sera rétablie immédiatement.
 
-## 🌐 Phase 5 : Déploiement du Serveur Web (Debian 12)
+## 🌐 Phase 5 : Déploiement du Serveur Web (Debian 13)
 
 L'installation du serveur Web va maintenant se dérouler dans la zone isolée (DMZ). Avant de démarrer l'installation, il est nécessaire d'autoriser cette zone à accéder à Internet afin de pouvoir télécharger les paquets requis (comme Nginx).
 
@@ -439,7 +439,7 @@ L'installation du serveur Web va maintenant se dérouler dans la zone isolée (D
 
 <br>
 
-### 2. Installation de l'OS Debian 12
+### 2. Installation de l'OS Debian 13
 
 1. Dans VMware, sélectionner la VM `Serveur-Web-Debian` et cliquer sur **Power on this virtual machine**.
 2. Dans le menu de démarrage, choisir **Install** (l'installation classique en mode texte, recommandée pour les serveurs).

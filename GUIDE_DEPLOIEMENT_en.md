@@ -42,7 +42,7 @@ flowchart TD
 | VM Role | System | vCPU | RAM | Disk | Interfaces | Virtual Networks | IP Addresses |
 | :--- | :--- | :---: | :---: | :---: | :--- | :--- | :--- |
 | **Firewall** | OPNsense | 1 | 1-2 GB | 20 GB | WAN (em0), LAN (em1), DMZ (em2) | **VMnet8** (NAT), **VMnet10** (Host-only), **VMnet20** (Host-only) | DHCP, `192.168.10.1/24`, `192.168.20.1/24` |
-| **Web Server** | Debian 12 | 1 | 1-2 GB | 25 GB | eth0 | **VMnet20** (DMZ) | `192.168.20.10/24` (Static) |
+| **Web Server** | Debian 13 | 1 | 1-2 GB | 25 GB | eth0 | **VMnet20** (DMZ) | `192.168.20.10/24` (Static) |
 | **Client** | Windows 10 | 4 | 4-6 GB | 40 GB | Ethernet0 | **VMnet10** (LAN) | OPNsense DHCP (`192.168.10.x`) |
 
 # 📋 Deployment Plan: Network and Security Infrastructure under VMware
@@ -62,7 +62,7 @@ The initial step involves configuring the virtual network switches in VMware bef
 The three machines must be configured according to the sizing table defined in the architecture.
 
 * **OPNsense Firewall:** 1 vCPU, 2 GB RAM, 20 GB Disk. Strict addition of the 3 network cards in the correct order to simplify configuration: WAN (VMnet8) first, LAN (VMnet10) second, DMZ (VMnet20) third.
-* **Web Server (Debian 12):** 1 vCPU, 2 GB RAM, 25 GB Disk. Addition of a single network card assigned to the DMZ (VMnet20).
+* **Web Server (Debian 13):** 1 vCPU, 2 GB RAM, 25 GB Disk. Addition of a single network card assigned to the DMZ (VMnet20).
 * **Client (Windows 10):** 4 vCPU, 6 GB RAM, 40 GB Disk. Addition of a single network card assigned to the LAN (VMnet10).
 
 ## 🔥 Phase 3: Installation and Initial Configuration of OPNsense (Console)
@@ -82,7 +82,7 @@ Setup of the user workstation in the internal network, which will also serve as 
 * Verification of the successful IP address retrieval (`192.168.10.x`) via the OPNsense DHCP.
 * Access to the OPNsense Web graphical interface (WebGUI) from the client's browser.
 
-## 🌐 Phase 5: Deployment of the Web Server (Debian 12)
+## 🌐 Phase 5: Deployment of the Web Server (Debian 13)
 
 Setup of the server in the isolated zone.
 
@@ -369,7 +369,7 @@ An initial setup assistant (*Wizard*) will execute automatically upon the first 
 > * **Symptom:** OPNsense loses Internet access, system updates fail, and the NAT gateway (`192.168.38.2`) returns `Host is down` responses to ICMP pings.
 > * **Resolution:** On the physical Windows host, open the Run dialog (**Windows + R**), execute `services.msc`, and restart both the **VMware NAT Service** and **VMware DHCP Service**. Network connectivity and repository access will be immediately restored.
 
-## 🌐 Phase 5: Deployment of the Web Server (Debian 12)
+## 🌐 Phase 5: Deployment of the Web Server (Debian 13)
 
 Installation of the Web server will now proceed within the isolated DMZ. Prior to installation, Internet access must be temporarily granted to this zone to facilitate package downloads (e.g., Nginx).
 
@@ -388,7 +388,7 @@ Installation of the Web server will now proceed within the isolated DMZ. Prior t
 4. Click **Save** at the bottom of the form, then click **Apply Changes**.
    *(Note: Optional interfaces (OPT) in OPNsense are subject to an implicit "Deny All" block rule. This temporary permissive rule allows the Debian host outbound Internet access for OS installation and updates. Restrictions will be reapplied in Phase 6).*
 
-### 2. Debian 12 OS Installation
+### 2. Debian 13 OS Installation
 
 1. In VMware, select the `Serveur-Web-Debian` VM and click **Power on this virtual machine**.
 2. At the boot menu, select **Install** (the standard text-mode installation, recommended for servers).
